@@ -6,26 +6,28 @@
                 <input type="text" placeholder="Recherchez un personnage" class="search" v-model="this.search">
             </div>
             <div>
+                <input type="button" v-if="this.isAdmin"/>
                 <div class="persoall" v-for="perso in this.persosFiltered" :key="perso.id_perso">
                     <p class="personame">{{ perso.nom_p }}</p>
-                    <p>{{ perso.etoiles}}</p>
-                    <p>{{ perso.element}}</p>
-                    <p>{{ perso.taille}}</p>
+                    <p>{{ perso.etoiles }}</p>
+                    <p>{{ perso.element }}</p>
+                    <p>{{ perso.taille }}</p>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script>
-    //import axios from 'axios';
+
+<script> 
+    import axios from 'axios'
     export default{
         name:'personnages-component',
         components:{},
         methods:{
             getPersos(){
-               //await axios.get('http://localhost:5000/persos').then(response =>  console.log(response));
-                this.persos =   [
+               axios.get('http://localhost:5000/persos').then(response=>this.result=(response.data));
+               /*this.persos =   [
                                     {
                                         "id_perso": 1,
                                         "nom_p": "Kazuha",
@@ -54,23 +56,31 @@
                                         "element": "anemo",
                                         "taille": "moyenne"
                                     }
-                                ];
+                                ];*/
             }
         },
         data(){
             return{
                 persos:[{}],
-                search: ''
+                search: '',
+                result:[{}],
             }
         },
+       /* mounted(){
+            axios.get('http://localhost:5000/persos').then(response => this.persos=(response.data.results));
+        },*/
         beforeMount(){
             this.getPersos()
         },
         computed: {
-            persosFiltered() {
+            persosFiltered() { 
                 return this.persos.filter(perso => {
                     return perso.nom_p.toLowerCase().includes(this.search.toLowerCase())
                 })
+            },
+            isAdmin(){
+                console.log(this.user);
+                return !this.user.admin;
             }
         }
     }
