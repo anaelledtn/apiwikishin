@@ -1,9 +1,9 @@
 {
     "scripts": {
-    "frontend": "cd front-cli && npm start",
-    "api": "cd back && nodemon index.js",
+    "frontend": "npm --prefix ./front-cli start",
+    "api": "nodemon --prefix ./back index.js",
     "dev": "concurrently --kill-others-on-fail \"npm run api\" \"npm run frontend\"",
-    "heroku-postbuild": "cd front-cli && npm install && npm run build"
+    "heroku-postbuild": "npm --prefix ./front-cli install && npm --prefix ./front-cli run build"
   }
 
 }
