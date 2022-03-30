@@ -7,7 +7,7 @@ let app = createApp(App);
 app.config.globalProperties.user = {
     isLogged: false
 };
-
+/*
 app.config.globalProperties.users = [
     {
         "id_user": 1,
@@ -20,9 +20,9 @@ app.config.globalProperties.users = [
         "id_user": 2,
         "prenom": "Anaelle",
         "email": "anaelle.danton@gmail.com",
-        "password": "Anaelle<3",
+        "password": "Anaelle",
         "admin": true
     }
-];
+];*/
 
 app.use(router).mount('#app');
