@@ -6,7 +6,7 @@
                 <input type="text" placeholder="Recherchez un personnage" class="search" v-model="this.search">
             </div>
             <div>
-                <input type="button" v-if="this.isAdmin"/>
+                <input type="button" value="Ajouter" v-if="this.isAdmin"/>
                 <div class="persoall" v-for="perso in this.persosFiltered" :key="perso.id_perso">
                     <p class="personame">{{ perso.nom_p }}</p>
                     <p>{{ perso.etoiles }}</p>
@@ -27,36 +27,7 @@
         methods:{
             getPersos(){
                axios.get('http://localhost:5000/persos').then(response=>this.result=(response.data));
-               /*this.persos =   [
-                                    {
-                                        "id_perso": 1,
-                                        "nom_p": "Kazuha",
-                                        "etoiles": 5,
-                                        "element": "anemo",
-                                        "taille": "moyenne"
-                                    },
-                                    {
-                                        "id_perso": 3,
-                                        "nom_p": "Kaeya",
-                                        "etoiles": 4,
-                                        "element": "cryo",
-                                        "taille": "grande"
-                                    },
-                                    {
-                                        "id_perso": 7,
-                                        "nom_p": "Jean",
-                                        "etoiles": 5,
-                                        "element": "anemo",
-                                        "taille": "grande"
-                                    },
-                                    {
-                                        "id_perso": 9,
-                                        "nom_p": "Sucrose",
-                                        "etoiles": 4,
-                                        "element": "anemo",
-                                        "taille": "moyenne"
-                                    }
-                                ];*/
+               
             }
         },
         data(){
@@ -66,9 +37,9 @@
                 result:[{}],
             }
         },
-       /* mounted(){
+       mounted(){
             axios.get('http://localhost:5000/persos').then(response => this.persos=(response.data.results));
-        },*/
+        },
         beforeMount(){
             this.getPersos()
         },
